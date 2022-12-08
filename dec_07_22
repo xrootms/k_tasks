@@ -1,0 +1,54 @@
+Step:1  
+//Create Directories for the websites//
+$ /var/www/html
+$ mkdir /var/www/kellton01.com/html
+$ mkdir /var/www/kellton02.com/html
+
+Step:2 
+//Permission Update on the document root//
+$ sudo chown -R $USER:$USER /var/www/kellton01.com/html
+$ sudo chown -R $USER:$USER /var/www/kellton02.com/html
+$ sudo chmod -R 755 /var/www
+
+Step:3
+//Create Sample file to test the websites//
+$ sudo nano /var/www/kellton01.com/html/index.html
+$ sudo nano /var/www/kellton02.com/html/index.html
+
+Step:4
+//Create first virtual file of “kellton01” and "kellton02"
+$ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/kellton01.com.conf
+$ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/kellton02.com.conf
+
+$ sudo nano/etc/apache2/sites-available/kellton01.com.conf
+        ServerAdmin admin@kellton01.com
+        ServerName kellton01.com
+        ServerAlias www.kellton01.com
+        DocumentRoot /var/www/kellton01.com/html
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+        save
+$ sudo nano/etc/apache2/sites-available/kellton02.com.conf
+        ServerAdmin admin@kellton02.com
+        ServerName kellton02.com
+        ServerAlias www.kellton02.com
+        DocumentRoot /var/www/kellton02.com/html
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+        
+Step:5      
+// Enable New Virtual Hosts files//
+$ sudo a2ensite website1.com.conf
+$ sudo a2ensite website2.com.conf
+
+//Disable default virtual host file using following command.
+$ sudo a2dissite 000-default.conf
+
+Step:6
+//Test Websites Using Local Host //
+
+ “/etc/hosts”
+ Test Your Results on Browser
+
+
+
